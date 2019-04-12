@@ -66,6 +66,15 @@ public:
   }
 
   //################################################################################################
+  template<typename T>
+  void memberCast(const std::function<void(const T&)> closure) const
+  {
+    for(auto member : members())
+      if(auto m = dynamic_cast<T*>(member); m)
+        closure(*m);
+  }
+
+  //################################################################################################
   void clear();
 
 private:

@@ -187,6 +187,8 @@ void CollectionFactory::cloneAppend(std::string& error,
       continue;
     }
 
+    newMember->setName(member->name());
+    newMember->setTimestampMS(member->timestampMS());
     output.addMember(newMember);
   }
 }
