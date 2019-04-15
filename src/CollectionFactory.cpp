@@ -11,10 +11,7 @@
 #include "json.hpp"
 
 #include <memory>
-
-#ifdef TP_FILESYSTEM
-#include <experimental/filesystem>
-#endif
+#include <unordered_map>
 
 namespace tp_data
 {
@@ -423,8 +420,7 @@ void CollectionFactory::saveToPath(std::string& error,
   nlohmann::json existingMembersIndex = nlohmann::json::array();
 
   //-- Create the output directory -----------------------------------------------------------------
-  std::experimental::filesystem::path dir(path);
-  if(std::experimental::filesystem::exists(dir))
+  if(tp_utils::exists(path))
   {
     if(!append)
     {
@@ -447,7 +443,7 @@ void CollectionFactory::saveToPath(std::string& error,
     }
   }
 
-  else if(!std::experimental::filesystem::create_directory(dir))
+  else if(!tp_utils::mkdir(path, tp_utils::CreateFullPath::No))
   {
     error = "Failed to create output directory.";
     return;
