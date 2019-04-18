@@ -12,7 +12,7 @@ class CollectionFactory;
 TDP_DECLARE_ID(                       stringSID,                           "String")
 
 //##################################################################################################
-//! Add the collection factories that this module provides to the StepDelegateMap
+//! Add the collection factories that this module provides to the CollectionFactory
 void createCollectionFactories(tp_data::CollectionFactory& collectionFactory);
 
 }
