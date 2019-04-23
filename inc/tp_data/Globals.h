@@ -17,6 +17,10 @@ TDP_DECLARE_ID(                       stringSID,                           "Stri
 void createCollectionFactories(CollectionFactory& collectionFactory);
 
 //##################################################################################################
+//! Add all of the collection factories that have been registered to the CollectionFactory
+void createAllCollectionFactories(CollectionFactory& collectionFactory);
+
+//##################################################################################################
 std::vector<std::function<void(CollectionFactory&)>>& createCollectionFactoriesRegister();
 
 //##################################################################################################

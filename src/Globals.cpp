@@ -14,6 +14,13 @@ void createCollectionFactories(CollectionFactory& collectionFactory)
 }
 
 //##################################################################################################
+void createAllCollectionFactories(CollectionFactory& collectionFactory)
+{
+  for(const auto& createCollectionFactories : tp_data::createCollectionFactoriesRegister())
+    createCollectionFactories(collectionFactory);
+}
+
+//##################################################################################################
 std::vector<std::function<void(CollectionFactory&) > > & createCollectionFactoriesRegister()
 {
   static std::vector<std::function<void(tp_data::CollectionFactory&)>> createCollectionFactoriesRegister;
