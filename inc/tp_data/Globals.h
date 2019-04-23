@@ -31,7 +31,7 @@ char createCollectionFactories_reg = [] \
 { \
   tp_data::createCollectionFactoriesRegister().push_back(createCollectionFactories); \
   return 0; \
-}();
+}()
 
 //##################################################################################################
 //! Static initialization of this module, see TP_STATIC_INIT in dependencies.pri
