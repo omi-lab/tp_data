@@ -2,6 +2,7 @@
 #define tp_data_Globals_h
 
 #include "tp_utils/StringID.h"
+#include "tp_utils/DebugUtils.h"
 
 //##################################################################################################
 //! A pipeline for performing image processing
@@ -13,7 +14,24 @@ TDP_DECLARE_ID(                       stringSID,                           "Stri
 
 //##################################################################################################
 //! Add the collection factories that this module provides to the CollectionFactory
-void createCollectionFactories(tp_data::CollectionFactory& collectionFactory);
+void createCollectionFactories(CollectionFactory& collectionFactory);
+
+//##################################################################################################
+std::vector<std::function<void(CollectionFactory&)>>& createCollectionFactoriesRegister();
+
+//##################################################################################################
+//! Add this namspaces createCollectionFactories method to the global register.
+#define REGISTER_CREATE_COLLECTION_FACTORIES \
+extern char createCollectionFactories_reg; \
+char createCollectionFactories_reg = [] \
+{ \
+  tp_data::createCollectionFactoriesRegister().push_back(createCollectionFactories); \
+  return 0; \
+}();
+
+//##################################################################################################
+//! Static initialization of this module, see TP_STATIC_INIT in dependencies.pri
+int staticInit();
 
 }
 

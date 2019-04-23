@@ -8,9 +8,24 @@ namespace tp_data
 TDP_DEFINE_ID(                       stringSID,                           "String")
 
 //##################################################################################################
-void createCollectionFactories(tp_data::CollectionFactory& collectionFactory)
+void createCollectionFactories(CollectionFactory& collectionFactory)
 {
   collectionFactory.addMemberFactory(new StringMemberFactory());
+}
+
+//##################################################################################################
+std::vector<std::function<void(CollectionFactory&) > > & createCollectionFactoriesRegister()
+{
+  static std::vector<std::function<void(tp_data::CollectionFactory&)>> createCollectionFactoriesRegister;
+  return createCollectionFactoriesRegister;
+}
+
+REGISTER_CREATE_COLLECTION_FACTORIES;
+
+//##################################################################################################
+int staticInit()
+{
+  return 0;
 }
 
 }
