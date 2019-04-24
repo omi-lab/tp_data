@@ -1,16 +1,26 @@
 #include "tp_data/Globals.h"
 #include "tp_data/CollectionFactory.h"
 #include "tp_data/members/StringMember.h"
+#include "tp_data/members/NumberMember.h"
 
 //##################################################################################################
 namespace tp_data
 {
 TDP_DEFINE_ID(                       stringSID,                           "String")
+TDP_DEFINE_ID(                          intSID,                              "Int")
+TDP_DEFINE_ID(                        sizeTSID,                           "Size t")
+TDP_DEFINE_ID(                        floatSID,                            "Float")
+TDP_DEFINE_ID(                       doubleSID,                           "Double")
 
 //##################################################################################################
 void createCollectionFactories(CollectionFactory& collectionFactory)
 {
   collectionFactory.addMemberFactory(new StringMemberFactory());
+
+  collectionFactory.addMemberFactory(new    IntMemberFactory());
+  collectionFactory.addMemberFactory(new  SizeTMemberFactory());
+  collectionFactory.addMemberFactory(new  FloatMemberFactory());
+  collectionFactory.addMemberFactory(new DoubleMemberFactory());
 }
 
 //##################################################################################################

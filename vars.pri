@@ -21,3 +21,6 @@ HEADERS += inc/tp_data/CollectionFactory.h
 #-- Members ----------------------------------------------------------------------------------------
 SOURCES += src/members/StringMember.cpp
 HEADERS += inc/tp_data/members/StringMember.h
+
+SOURCES += src/members/NumberMember.cpp
+HEADERS += inc/tp_data/members/NumberMember.h
