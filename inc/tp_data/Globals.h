@@ -2,7 +2,6 @@
 #define tp_data_Globals_h
 
 #include "tp_utils/StringID.h"
-#include "tp_utils/DebugUtils.h"
 
 //##################################################################################################
 //! A pipeline for performing image processing
