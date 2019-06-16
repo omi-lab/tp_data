@@ -32,7 +32,7 @@ std::vector<std::function<void(CollectionFactory&)>>& createCollectionFactoriesR
 extern char createCollectionFactories_reg; \
 char createCollectionFactories_reg = [] \
 { \
-  tp_data::createCollectionFactoriesRegister().push_back(createCollectionFactories); \
+  tp_data::createCollectionFactoriesRegister().emplace_back(createCollectionFactories); \
   return 0; \
 }()
 

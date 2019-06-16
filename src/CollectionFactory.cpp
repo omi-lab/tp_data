@@ -22,7 +22,7 @@ namespace
 //##################################################################################################
 void addPart(std::string& output, const std::string& key, const std::string& data)
 {
-  uint8_t keyLen = uint8_t(key.size());
+  auto keyLen = uint8_t(key.size());
   auto partLen = keyLen + data.size() + 5;
 
   output.reserve(output.size()+partLen);
@@ -52,7 +52,7 @@ bool parsePart(std::string& error, const std::string& input, int& startFrom, std
   if(int(input.size())<=startFrom)
     return false;
 
-  uint8_t keyLen = static_cast<uint8_t>(input.at(size_t(startFrom)));
+  auto keyLen = static_cast<uint8_t>(input.at(size_t(startFrom)));
   startFrom++;
 
 
@@ -75,7 +75,7 @@ bool parsePart(std::string& error, const std::string& input, int& startFrom, std
   uint32_t dataLen = 0;
   for(uint32_t i=0; i<4; i++)
   {
-    uint8_t p = static_cast<uint8_t>(input.at(size_t(startFrom)));
+    auto p = uint8_t(input.at(size_t(startFrom)));
     startFrom++;
     dataLen |= (uint32_t(p) << (8*i));
   }
@@ -304,12 +304,7 @@ void CollectionFactory::loadFromData(std::string& error,
   }
 
   if(!flushState())
-  {
     error = "Final flush state error.";
-    return;
-  }
-
-  return;
 }
 
 //##################################################################################################
@@ -344,11 +339,14 @@ void CollectionFactory::loadFromPath(std::string& error,
     if(!factory)
     {
       tpWarning() << "Failed to find member factory for: " << type;
-      error = "Failed to find member factory for: " + type;
+      error = "Failed to find member factory for: ";
+      error += type;
       return;
     }
 
-    std::string memberPath = path + "/" + fileName;
+    std::string memberPath = path;
+    memberPath += "/";
+    memberPath += fileName;
     auto member = factory->load(error, tp_utils::readBinaryFile(memberPath));
 
 
@@ -359,7 +357,10 @@ void CollectionFactory::loadFromPath(std::string& error,
 
       tpWarning() << "Failed to load a member, name: " << name << " type: " << type;
       tpWarning() << "  -- From path: " << memberPath;
-      error = "Failed to load a member, name: " + name + " type: " + type;
+      error = "Failed to load a member, name: ";
+      error += name;
+      error += " type: ";
+      error += type;
       return;
     }
 
@@ -473,8 +474,13 @@ void CollectionFactory::saveToPath(std::string& error,
       return;
     }
 
-    std::string fileName = name + "." + factory->extension();
-    std::string filePath = path + "/" + fileName;
+    std::string fileName = name;
+    fileName += ".";
+    fileName += factory->extension();
+
+    std::string filePath = path;
+    filePath += "/";
+    filePath += fileName;
 
     tp_utils::writeBinaryFile(filePath, data);
 

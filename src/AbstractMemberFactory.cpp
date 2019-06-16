@@ -4,9 +4,9 @@ namespace tp_data
 {
 
 //##################################################################################################
-AbstractMemberFactory::AbstractMemberFactory(const tp_utils::StringID& type, const std::string& extension):
-  m_type(type),
-  m_extension(extension)
+AbstractMemberFactory::AbstractMemberFactory(tp_utils::StringID type, std::string extension):
+  m_type(std::move(type)),
+  m_extension(std::move(extension))
 {
 
 }

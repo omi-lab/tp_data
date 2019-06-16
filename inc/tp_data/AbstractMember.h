@@ -19,9 +19,9 @@ public:
   //! Pass in the name used to uniquily identify this member.
   /*!
   \param name The name of this member unique within the collection that it is part of.
-  \param type The type of this member.
+  \param type The typeof this member.
   */
-  AbstractMember(const std::string& name, const tp_utils::StringID& type);
+  AbstractMember(std::string name, tp_utils::StringID type);
 
   //################################################################################################
   virtual ~AbstractMember();

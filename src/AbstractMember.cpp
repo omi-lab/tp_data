@@ -6,9 +6,9 @@ namespace tp_data
 {
 
 //##################################################################################################
-AbstractMember::AbstractMember(const std::string& name, const tp_utils::StringID& type):
-  m_name(name),
-  m_type(type),
+AbstractMember::AbstractMember(std::string name, tp_utils::StringID type):
+  m_name(std::move(name)),
+  m_type(std::move(type)),
   m_timestampMS(tp_utils::currentTimeMS())
 {
 

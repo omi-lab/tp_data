@@ -22,7 +22,7 @@ public:
   \param type The type of member this factory works with.
   \param extension The file extension to save these members with.
   */
-  AbstractMemberFactory(const tp_utils::StringID& type, const std::string& extension);
+  AbstractMemberFactory(tp_utils::StringID type, std::string extension);
 
   //################################################################################################
   virtual ~AbstractMemberFactory();

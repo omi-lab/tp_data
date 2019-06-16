@@ -9,10 +9,14 @@ namespace tp_data
 //##################################################################################################
 struct Collection::Private
 {
+  TP_NONCOPYABLE(Private);
   std::string name;
   int64_t timestampMS{tp_utils::currentTimeMS()};
   std::vector<std::string> errors;
   std::vector<AbstractMember*> members;
+
+  //################################################################################################
+  Private()=default;
 
   //################################################################################################
   ~Private()
