@@ -29,8 +29,8 @@ std::vector<std::function<void(CollectionFactory&)>>& createCollectionFactoriesR
 //##################################################################################################
 //! Add this namspaces createCollectionFactories method to the global register.
 #define REGISTER_CREATE_COLLECTION_FACTORIES \
-extern char createCollectionFactories_reg; \
-char createCollectionFactories_reg = [] \
+extern int createCollectionFactories_reg; \
+int createCollectionFactories_reg = [] \
 { \
   tp_data::createCollectionFactoriesRegister().emplace_back(createCollectionFactories); \
   return 0; \
