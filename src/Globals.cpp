@@ -6,11 +6,11 @@
 //##################################################################################################
 namespace tp_data
 {
-TDP_DEFINE_ID(                       stringSID,                           "String")
-TDP_DEFINE_ID(                          intSID,                              "Int")
-TDP_DEFINE_ID(                        sizeTSID,                           "Size t")
-TDP_DEFINE_ID(                        floatSID,                            "Float")
-TDP_DEFINE_ID(                       doubleSID,                           "Double")
+TDP_DEFINE_ID(                       stringSID,                           "String");
+TDP_DEFINE_ID(                          intSID,                              "Int");
+TDP_DEFINE_ID(                        sizeTSID,                           "Size t");
+TDP_DEFINE_ID(                        floatSID,                            "Float");
+TDP_DEFINE_ID(                       doubleSID,                           "Double");
 
 //##################################################################################################
 void createCollectionFactories(CollectionFactory& collectionFactory)

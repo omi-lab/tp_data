@@ -9,11 +9,11 @@ namespace tp_data
 {
 class CollectionFactory;
 
-TDP_DECLARE_ID(                       stringSID,                           "String")
-TDP_DECLARE_ID(                          intSID,                              "Int")
-TDP_DECLARE_ID(                        sizeTSID,                           "Size t")
-TDP_DECLARE_ID(                        floatSID,                            "Float")
-TDP_DECLARE_ID(                       doubleSID,                           "Double")
+TDP_DECLARE_ID(                       stringSID,                           "String");
+TDP_DECLARE_ID(                          intSID,                              "Int");
+TDP_DECLARE_ID(                        sizeTSID,                           "Size t");
+TDP_DECLARE_ID(                        floatSID,                            "Float");
+TDP_DECLARE_ID(                       doubleSID,                           "Double");
 
 //##################################################################################################
 //! Add the collection factories that this module provides to the CollectionFactory
