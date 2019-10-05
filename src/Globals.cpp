@@ -6,11 +6,11 @@
 //##################################################################################################
 namespace tp_data
 {
-tp_qt_DEFINE_ID(                       stringSID,                           "String");
-tp_qt_DEFINE_ID(                          intSID,                              "Int");
-tp_qt_DEFINE_ID(                        sizeTSID,                           "Size t");
-tp_qt_DEFINE_ID(                        floatSID,                            "Float");
-tp_qt_DEFINE_ID(                       doubleSID,                           "Double");
+TP_DEFINE_ID(                       stringSID,                           "String");
+TP_DEFINE_ID(                          intSID,                              "Int");
+TP_DEFINE_ID(                        sizeTSID,                           "Size t");
+TP_DEFINE_ID(                        floatSID,                            "Float");
+TP_DEFINE_ID(                       doubleSID,                           "Double");
 
 //##################################################################################################
 void createCollectionFactories(CollectionFactory& collectionFactory)

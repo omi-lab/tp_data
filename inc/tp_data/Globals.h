@@ -9,11 +9,11 @@ namespace tp_data
 {
 class CollectionFactory;
 
-tp_qt_DECLARE_ID(                       stringSID,                           "String");
-tp_qt_DECLARE_ID(                          intSID,                              "Int");
-tp_qt_DECLARE_ID(                        sizeTSID,                           "Size t");
-tp_qt_DECLARE_ID(                        floatSID,                            "Float");
-tp_qt_DECLARE_ID(                       doubleSID,                           "Double");
+TP_DECLARE_ID(                       stringSID,                           "String");
+TP_DECLARE_ID(                          intSID,                              "Int");
+TP_DECLARE_ID(                        sizeTSID,                           "Size t");
+TP_DECLARE_ID(                        floatSID,                            "Float");
+TP_DECLARE_ID(                       doubleSID,                           "Double");
 
 //##################################################################################################
 //! Add the collection factories that this module provides to the CollectionFactory
