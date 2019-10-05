@@ -1,7 +1,7 @@
 TARGET = tp_data
 TEMPLATE = lib
 
-DEFINES += TDP_DATA_LIBRARY
+DEFINES += tp_qt_DATA_LIBRARY
 
 SOURCES += src/Globals.cpp
 HEADERS += inc/tp_data/Globals.h
