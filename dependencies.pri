@@ -1,5 +1,4 @@
-TP_DEPENDENCIES += filesystem
-DEPENDENCIES += tp_utils
+DEPENDENCIES += tp_utils_filesystem
 INCLUDEPATHS += tp_data/inc/
 LIBRARIES    += tp_data
 
