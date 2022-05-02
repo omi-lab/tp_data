@@ -173,14 +173,14 @@ void CollectionFactory::cloneAppend(std::string& error,
     auto factory=memberFactory(type);
     if(!factory)
     {
-      error = "Failed to find factory for member type: " + type.keyString();
+      error = "Failed to find factory for member type: " + type.toString();
       continue;
     }
 
     auto newMember = factory->clone(error, *member);
     if(!newMember)
     {
-      error = "Failed to clone member of type: " + type.keyString();
+      error = "Failed to clone member of type: " + type.toString();
       continue;
     }
 
@@ -315,18 +315,18 @@ void CollectionFactory::loadFromPath(std::string& error,
 {
   nlohmann::json j = tp_utils::readJSONFile(path + "/index.json");
 
-  output.setName(tp_utils::getJSONValue<std::string>(j, "name"));
-  output.setTimestampMS(tp_utils::getJSONValue<int64_t>(j, "timestamp"));
+  output.setName(TPJSONString(j, "name"));
+  output.setTimestampMS(TPJSONInt64T(j, "timestamp"));
 
   for(const nlohmann::json& i : tp_utils::getJSONArray(j, "members"))
   {
-    auto name = tp_utils::getJSONValue<std::string>(i, "name");
+    auto name = TPJSONString(i, "name");
     if(!subset.empty() && !tpContains(subset, name))
       continue;
 
-    auto fileName  = tp_utils::getJSONValue<std::string>(i, "fileName");
-    auto type      = tp_utils::getJSONValue<std::string>(i, "type");
-    auto timestamp = tp_utils::getJSONValue<int64_t>    (i, "timestamp");
+    auto fileName  = TPJSONString(i, "fileName");
+    auto type      = TPJSONString(i, "type");
+    auto timestamp = TPJSONInt64T(i, "timestamp");
 
     if(type.empty())
     {
@@ -384,7 +384,7 @@ void CollectionFactory::saveToData(std::string& error, const Collection& collect
 
     if(!factory)
     {
-      error = "Failed to find factory for member type: " + type.keyString();
+      error = "Failed to find factory for member type: " + type.toString();
       return;
     }
 
@@ -394,12 +394,12 @@ void CollectionFactory::saveToData(std::string& error, const Collection& collect
 
     if(!error.empty())
     {
-      error += "Failed to serialize name:" + member->name() + " type:" + type.keyString();
+      error += "Failed to serialize name:" + member->name() + " type:" + type.toString();
       return;
     }
 
     addPart(data, "member", member->name());
-    addPart(data, "type", type.keyString());
+    addPart(data, "type", type.toString());
     addPart(data, "timestamp", timestamp);
     addPart(data, "data", memberData);
   }
@@ -461,7 +461,7 @@ void CollectionFactory::saveToPath(std::string& error,
     auto factory=memberFactory(type);
     if(!factory)
     {
-      error = "Failed to find factory for member type: " + type.keyString();
+      error = "Failed to find factory for member type: " + type.toString();
       return;
     }
 
@@ -470,7 +470,7 @@ void CollectionFactory::saveToPath(std::string& error,
 
     if(!error.empty())
     {
-      error += "Failed to serialize name:" + name + " type:" + type.keyString();
+      error += "Failed to serialize name:" + name + " type:" + type.toString();
       return;
     }
 
@@ -489,7 +489,7 @@ void CollectionFactory::saveToPath(std::string& error,
       nlohmann::json j;
       j["name"] = name;
       j["fileName"] = fileName;
-      j["type"] = type.keyString();
+      j["type"] = type.toString();
       membersIndex.push_back(j);
     }
   }
@@ -519,7 +519,7 @@ AbstractMember* CollectionFactory::clone(std::string& error, const AbstractMembe
   auto factory = memberFactory(member.type());
   if(!factory)
   {
-    error = "Failed to find factory for member type: " + member.type().keyString();
+    error = "Failed to find factory for member type: " + member.type().toString();
     return nullptr;
   }
 
@@ -535,7 +535,7 @@ void CollectionFactory::serializeMember(std::string& error,
   auto factory = memberFactory(member.type());
   if(!factory)
   {
-    error = "Failed to find factory for member type: " + member.type().keyString();
+    error = "Failed to find factory for member type: " + member.type().toString();
     return;
   }
 

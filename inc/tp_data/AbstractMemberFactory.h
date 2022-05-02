@@ -91,7 +91,7 @@ public:
     auto m = dynamic_cast<const T*>(&member);
     if(!m)
     {
-      error = "Failed to find member of type " + type().keyString();
+      error = "Failed to find member of type " + type().toString();
       return nullptr;
     }
 
@@ -104,7 +104,7 @@ public:
     auto m = dynamic_cast<const T*>(&member);
     if(!m)
     {
-      error = "Failed to find member of type " + type().keyString();
+      error = "Failed to find member of type " + type().toString();
       return;
     }
 
@@ -121,7 +121,7 @@ public:
     }
     catch(...)
     {
-      error = "Failed to parse JSON for " + type().keyString();
+      error = "Failed to parse JSON for " + type().toString();
       return nullptr;
     }
   }
@@ -145,7 +145,7 @@ public:
     auto m = dynamic_cast<const T*>(&member);
     if(!m)
     {
-      error = "Failed to find member of type " + type().keyString();
+      error = "Failed to find member of type " + type().toString();
       return nullptr;
     }
 
@@ -160,7 +160,7 @@ public:
     auto m = dynamic_cast<const T*>(&member);
     if(!m)
     {
-      error = "Failed to find member of type " + type().keyString();
+      error = "Failed to find member of type " + type().toString();
       return;
     }
 
