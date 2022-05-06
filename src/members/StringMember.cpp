@@ -5,10 +5,10 @@ namespace tp_data
 const std::string StringMember::extension{"txt"};
 
 //##################################################################################################
-StringMember::StringMember(const std::string& name):
+StringMember::StringMember(const std::string& name, const std::string& data_):
   AbstractMember(name, stringSID())
 {
-
+  data = data_;
 }
 
 //##################################################################################################

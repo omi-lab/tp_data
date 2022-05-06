@@ -13,7 +13,7 @@ class StringMember : public tp_data::AbstractMember
 {
 public:
   //################################################################################################
-  StringMember(const std::string& name=std::string());
+  StringMember(const std::string& name=std::string(), const std::string& data_=std::string());
 
   //################################################################################################
   ~StringMember();
