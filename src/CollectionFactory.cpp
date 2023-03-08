@@ -318,55 +318,58 @@ void CollectionFactory::loadFromPath(std::string& error,
   output.setName(TPJSONString(j, "name"));
   output.setTimestampMS(TPJSONInt64T(j, "timestamp"));
 
-  for(const nlohmann::json& i : tp_utils::getJSONArray(j, "members"))
+  if(const auto i=j.find("members"); i!=j.end() && i->is_array())
   {
-    auto name = TPJSONString(i, "name");
-    if(!subset.empty() && !tpContains(subset, name))
-      continue;
-
-    auto fileName  = TPJSONString(i, "fileName");
-    auto type      = TPJSONString(i, "type");
-    auto timestamp = TPJSONInt64T(i, "timestamp");
-
-    if(type.empty())
+    for(const auto& jj : *i)
     {
-      error = "Empty member type!";
-      return;
+      auto name = TPJSONString(jj, "name");
+      if(!subset.empty() && !tpContains(subset, name))
+        continue;
+
+      auto fileName  = TPJSONString(jj, "fileName");
+      auto type      = TPJSONString(jj, "type");
+      auto timestamp = TPJSONInt64T(jj, "timestamp");
+
+      if(type.empty())
+      {
+        error = "Empty member type!";
+        return;
+      }
+
+      auto factory = memberFactory(type);
+
+      if(!factory)
+      {
+        tpWarning() << "Failed to find member factory for: " << type;
+        error = "Failed to find member factory for: ";
+        error += type;
+        return;
+      }
+
+      std::string memberPath = path;
+      memberPath += "/";
+      memberPath += fileName;
+      auto member = factory->load(error, tp_utils::readBinaryFile(memberPath));
+
+
+      if(!member || !error.empty())
+      {
+        tpWarning() << "Valid: " << (member!=nullptr);
+        tpWarning() << "Error: " << error;
+
+        tpWarning() << "Failed to load a member, name: " << name << " type: " << type;
+        tpWarning() << "  -- From path: " << memberPath;
+        error = "Failed to load a member, name: ";
+        error += name;
+        error += " type: ";
+        error += type;
+        return;
+      }
+
+      member->setName(name);
+      member->setTimestampMS(timestamp);
+      output.addMember(member);
     }
-
-    auto factory = memberFactory(type);
-
-    if(!factory)
-    {
-      tpWarning() << "Failed to find member factory for: " << type;
-      error = "Failed to find member factory for: ";
-      error += type;
-      return;
-    }
-
-    std::string memberPath = path;
-    memberPath += "/";
-    memberPath += fileName;
-    auto member = factory->load(error, tp_utils::readBinaryFile(memberPath));
-
-
-    if(!member || !error.empty())
-    {
-      tpWarning() << "Valid: " << (member!=nullptr);
-      tpWarning() << "Error: " << error;
-
-      tpWarning() << "Failed to load a member, name: " << name << " type: " << type;
-      tpWarning() << "  -- From path: " << memberPath;
-      error = "Failed to load a member, name: ";
-      error += name;
-      error += " type: ";
-      error += type;
-      return;
-    }
-
-    member->setName(name);
-    member->setTimestampMS(timestamp);
-    output.addMember(member);
   }
 }
 
