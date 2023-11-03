@@ -447,7 +447,7 @@ void CollectionFactory::saveToPath(std::string& error,
     }
   }
 
-  else if(!tp_utils::mkdir(path, tp_utils::CreateFullPath::No))
+  else if(!tp_utils::mkdir(path, TPCreateFullPath::No))
   {
     error = "Failed to create output directory.";
     return;
