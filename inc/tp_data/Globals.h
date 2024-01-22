@@ -14,6 +14,7 @@ TP_DECLARE_ID(                          intSID,                              "In
 TP_DECLARE_ID(                        sizeTSID,                           "Size t");
 TP_DECLARE_ID(                        floatSID,                            "Float");
 TP_DECLARE_ID(                       doubleSID,                           "Double");
+TP_DECLARE_ID(               stringIDVectorSID,                 "String id vector");
 
 //##################################################################################################
 //! Add the collection factories that this module provides to the CollectionFactory

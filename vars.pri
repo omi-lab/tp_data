@@ -24,3 +24,6 @@ HEADERS += inc/tp_data/members/StringMember.h
 
 SOURCES += src/members/NumberMember.cpp
 HEADERS += inc/tp_data/members/NumberMember.h
+
+SOURCES += src/members/StringIDVectorMember.cpp
+HEADERS += inc/tp_data/members/StringIDVectorMember.h

@@ -11,6 +11,7 @@ TP_DEFINE_ID(                          intSID,                              "Int
 TP_DEFINE_ID(                        sizeTSID,                           "Size t");
 TP_DEFINE_ID(                        floatSID,                            "Float");
 TP_DEFINE_ID(                       doubleSID,                           "Double");
+TP_DEFINE_ID(               stringIDVectorSID,                 "String id vector");
 
 //##################################################################################################
 void createCollectionFactories(CollectionFactory& collectionFactory)
