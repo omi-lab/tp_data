@@ -10,6 +10,7 @@ namespace tp_data
 class CollectionFactory;
 
 TP_DECLARE_ID(                       stringSID,                           "String");
+TP_DECLARE_ID(                     stringIDSID,                        "String id");
 TP_DECLARE_ID(                          intSID,                              "Int");
 TP_DECLARE_ID(                        sizeTSID,                           "Size t");
 TP_DECLARE_ID(                        floatSID,                            "Float");

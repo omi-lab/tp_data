@@ -6,9 +6,9 @@ namespace tp_data
 {
 
 //##################################################################################################
-AbstractMember::AbstractMember(std::string name, tp_utils::StringID type):
-  m_name(std::move(name)),
-  m_type(std::move(type)),
+AbstractMember::AbstractMember(const tp_utils::StringID& name, const tp_utils::StringID& type):
+  m_name(name),
+  m_type(type),
   m_timestampMS(tp_utils::currentTimeMS())
 {
 
@@ -18,13 +18,13 @@ AbstractMember::AbstractMember(std::string name, tp_utils::StringID type):
 AbstractMember::~AbstractMember() = default;
 
 //##################################################################################################
-const std::string& AbstractMember::name() const
+const tp_utils::StringID& AbstractMember::name() const
 {
   return m_name;
 }
 
 //##################################################################################################
-void AbstractMember::setName(const std::string& name)
+void AbstractMember::setName(const tp_utils::StringID& name)
 {
   m_name = name;
 }

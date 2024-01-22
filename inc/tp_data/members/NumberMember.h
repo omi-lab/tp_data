@@ -19,7 +19,7 @@ class NumberMember : public tp_data::AbstractMember, public NumberMemberExtensio
 {
 public:
   //################################################################################################
-  NumberMember(const std::string& name=std::string()):
+  NumberMember(const tp_utils::StringID& name=tp_utils::StringID()):
     AbstractMember(name, type_())
   {
 

@@ -96,7 +96,7 @@ const std::vector<AbstractMember*>& Collection::members() const
 }
 
 //##################################################################################################
-AbstractMember* Collection::member(const std::string& name) const
+AbstractMember* Collection::member(const tp_utils::StringID& name) const
 {
   for(auto member : d->members)
     if(member->name() == name)

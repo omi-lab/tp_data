@@ -13,7 +13,7 @@ class StringIDVectorMember : public tp_data::AbstractMember
 {
 public:
   //################################################################################################
-  StringIDVectorMember(const std::string& name=std::string(), const std::vector<tp_utils::StringID>& data_=std::vector<tp_utils::StringID>());
+  StringIDVectorMember(const tp_utils::StringID& name=tp_utils::StringID(), const std::vector<tp_utils::StringID>& data_=std::vector<tp_utils::StringID>());
 
   //################################################################################################
   ~StringIDVectorMember();

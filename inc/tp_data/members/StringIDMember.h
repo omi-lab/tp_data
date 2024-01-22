@@ -1,38 +1,36 @@
-#ifndef tp_data_StringMember_h
-#define tp_data_StringMember_h
+#ifndef tp_data_StringIDMember_h
+#define tp_data_StringIDMember_h
 
 #include "tp_data/AbstractMemberFactory.h"
-
-#include "json.hpp"
 
 namespace tp_data
 {
 
 //##################################################################################################
-class StringMember : public tp_data::AbstractMember
+class StringIDMember : public tp_data::AbstractMember
 {
 public:
   //################################################################################################
-  StringMember(const tp_utils::StringID& name=tp_utils::StringID(), const std::string& data_=std::string());
+  StringIDMember(const tp_utils::StringID& name=tp_utils::StringID(), const tp_utils::StringID& data_=tp_utils::StringID());
 
   //################################################################################################
-  ~StringMember();
+  ~StringIDMember();
 
   //################################################################################################
-  static StringMember* fromData(std::string& error, const std::string& data);
+  static StringIDMember* fromData(std::string& error, const std::string& data);
 
   //################################################################################################
   std::string toData() const;
 
   //################################################################################################
-  void copyData(const StringMember& other);
+  void copyData(const StringIDMember& other);
 
   static const std::string extension;
-  std::string data;
+  tp_utils::StringID data;
 };
 
 //##################################################################################################
-using StringMemberFactory = tp_data::MultiDataMemberFactoryTemplate<StringMember, stringSID>;
+using StringMemberFactory = tp_data::MultiDataMemberFactoryTemplate<StringIDMember, stringIDSID>;
 
 }
 

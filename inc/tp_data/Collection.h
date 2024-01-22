@@ -11,6 +11,8 @@ class AbstractMember;
 //! This holds a collection of data objects.
 class Collection
 {
+  TP_NONCOPYABLE(Collection);
+  TP_DQ;
 public:
   //################################################################################################
   Collection();
@@ -44,6 +46,7 @@ public:
   const std::vector<std::string>& errors() const;
 
   //################################################################################################
+  //! This takes ownership.
   void addMember(AbstractMember* member);
 
   //################################################################################################
@@ -56,11 +59,11 @@ public:
   \param name The unique name of the member to find.
   \returns A pointer to the member or nullptr.
   */
-  AbstractMember* member(const std::string& name) const;
+  AbstractMember* member(const tp_utils::StringID& name) const;
 
   //################################################################################################
   template<typename T>
-  void memberCast(const std::string& name, T*& member_) const
+  void memberCast(const tp_utils::StringID& name, T*& member_) const
   {
     member_ = dynamic_cast<T*>(member(name));
   }
@@ -76,11 +79,6 @@ public:
 
   //################################################################################################
   void clear();
-
-private:
-  struct Private;
-  friend struct Private;
-  Private* d;
 };
 
 }

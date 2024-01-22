@@ -397,11 +397,11 @@ void CollectionFactory::saveToData(std::string& error, const Collection& collect
 
     if(!error.empty())
     {
-      error += "Failed to serialize name:" + member->name() + " type:" + type.toString();
+      error += "Failed to serialize name:" + member->name().toString() + " type:" + type.toString();
       return;
     }
 
-    addPart(data, "member", member->name());
+    addPart(data, "member", member->name().toString());
     addPart(data, "type", type.toString());
     addPart(data, "timestamp", timestamp);
     addPart(data, "data", memberData);
@@ -454,11 +454,11 @@ void CollectionFactory::saveToPath(std::string& error,
   }
 
   //-- Save each member to its own file ------------------------------------------------------------
-  std::vector<std::string> newMembers;
+  std::vector<tp_utils::StringID> newMembers;
   newMembers.reserve(collection.members().size());
   for(const auto& member : collection.members())
   {
-    const std::string&        name = member->name();
+    const tp_utils::StringID& name = member->name();
     const tp_utils::StringID& type = member->type();
 
     auto factory=memberFactory(type);
@@ -473,11 +473,11 @@ void CollectionFactory::saveToPath(std::string& error,
 
     if(!error.empty())
     {
-      error += "Failed to serialize name:" + name + " type:" + type.toString();
+      error += "Failed to serialize name:" + name.toString() + " type:" + type.toString();
       return;
     }
 
-    std::string fileName = name;
+    std::string fileName = name.toString();
     fileName += ".";
     fileName += factory->extension();
 
@@ -490,7 +490,7 @@ void CollectionFactory::saveToPath(std::string& error,
     {
       newMembers.push_back(name);
       nlohmann::json j;
-      j["name"] = name;
+      j["name"] = name.toString();
       j["fileName"] = fileName;
       j["type"] = type.toString();
       membersIndex.push_back(j);

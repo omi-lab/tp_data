@@ -7,7 +7,7 @@ namespace tp_data
 const std::string StringIDVectorMember::extension{"json"};
 
 //##################################################################################################
-StringIDVectorMember::StringIDVectorMember(const std::string& name, const std::vector<tp_utils::StringID>& data_):
+StringIDVectorMember::StringIDVectorMember(const tp_utils::StringID& name, const std::vector<tp_utils::StringID>& data_):
   AbstractMember(name, stringSID())
 {
   data = data_;

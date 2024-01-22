@@ -1,7 +1,7 @@
 #ifndef tp_data_AbstractMember_h
 #define tp_data_AbstractMember_h
 
-#include "tp_data/Globals.h"
+#include "tp_data/Globals.h" // IWYU pragma: keep
 
 namespace tp_data
 {
@@ -21,7 +21,7 @@ public:
   \param name The name of this member unique within the collection that it is part of.
   \param type The typeof this member.
   */
-  AbstractMember(std::string name, tp_utils::StringID type);
+  AbstractMember(const tp_utils::StringID& name, const tp_utils::StringID& type);
 
   //################################################################################################
   virtual ~AbstractMember();
@@ -32,11 +32,11 @@ public:
   Each member has a name that is unique within the collection that it belongs.
   \returns The name of this member.
   */
-  const std::string& name() const;
+  const tp_utils::StringID& name() const;
 
   //################################################################################################
   //! Set the name of this member.
-  void setName(const std::string& name);
+  void setName(const tp_utils::StringID& name);
 
   //################################################################################################
   //! The type of this member.
@@ -59,14 +59,14 @@ public:
   void setTimestampMS(int64_t timestampMS);
 
 private:
-  std::string m_name;
+  tp_utils::StringID m_name;
   const tp_utils::StringID m_type;
   int64_t m_timestampMS;
 };
 
 //##################################################################################################
 template <typename M, typename T>
-M* makeMember(const std::string& name, const T& data)
+M* makeMember(const tp_utils::StringID& name, const T& data)
 {
   auto member = new M(name);
   member->data = data;

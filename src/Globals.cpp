@@ -1,12 +1,14 @@
 #include "tp_data/Globals.h"
 #include "tp_data/CollectionFactory.h"
 #include "tp_data/members/StringMember.h"
+#include "tp_data/members/StringIDVectorMember.h"
 #include "tp_data/members/NumberMember.h"
 
 //##################################################################################################
 namespace tp_data
 {
 TP_DEFINE_ID(                       stringSID,                           "String");
+TP_DEFINE_ID(                     stringIDSID,                        "String id");
 TP_DEFINE_ID(                          intSID,                              "Int");
 TP_DEFINE_ID(                        sizeTSID,                           "Size t");
 TP_DEFINE_ID(                        floatSID,                            "Float");
@@ -16,7 +18,8 @@ TP_DEFINE_ID(               stringIDVectorSID,                 "String id vector
 //##################################################################################################
 void createCollectionFactories(CollectionFactory& collectionFactory)
 {
-  collectionFactory.addMemberFactory(new StringMemberFactory());
+  collectionFactory.addMemberFactory(new         StringMemberFactory());
+  collectionFactory.addMemberFactory(new StringIDVectorMemberFactory());
 
   collectionFactory.addMemberFactory(new    IntMemberFactory());
   collectionFactory.addMemberFactory(new  SizeTMemberFactory());

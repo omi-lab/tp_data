@@ -1,36 +1,36 @@
-#include "tp_data/members/StringMember.h"
+#include "tp_data/members/StringIDMember.h"
 
 namespace tp_data
 {
-const std::string StringMember::extension{"txt"};
+const std::string StringIDMember::extension{"txt"};
 
 //##################################################################################################
-StringMember::StringMember(const tp_utils::StringID& name, const std::string& data_):
-  AbstractMember(name, stringSID())
+StringIDMember::StringIDMember(const tp_utils::StringID& name, const tp_utils::StringID& data_):
+  AbstractMember(name, stringIDSID())
 {
   data = data_;
 }
 
 //##################################################################################################
-StringMember::~StringMember() = default;
+StringIDMember::~StringIDMember() = default;
 
 //##################################################################################################
-StringMember* StringMember::fromData(std::string& error, const std::string& data)
+StringIDMember* StringIDMember::fromData(std::string& error, const std::string& data)
 {
   TP_UNUSED(error);
-  auto member = new StringMember();
+  auto member = new StringIDMember();
   member->data = data;
   return member;
 }
 
 //##################################################################################################
-std::string StringMember::toData() const
+std::string StringIDMember::toData() const
 {
-  return data;
+  return data.toString();
 }
 
 //##################################################################################################
-void StringMember::copyData(const StringMember& other)
+void StringIDMember::copyData(const StringIDMember& other)
 {
   data = other.data;
 }
