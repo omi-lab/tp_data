@@ -20,6 +20,7 @@ member types that the collection is expected to hold.
 */
 class CollectionFactory
 {
+  TP_DQ;
 public:
   //################################################################################################
   CollectionFactory();
@@ -141,11 +142,6 @@ public:
                        const AbstractMember& member,
                        std::string& data,
                        std::string& extension) const;
-
-private:
-  struct Private;
-  friend struct Private;
-  Private* d;
 };
 
 }
