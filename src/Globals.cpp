@@ -1,5 +1,6 @@
 #include "tp_data/Globals.h"
 #include "tp_data/CollectionFactory.h"
+#include "tp_data/members/StringIDMember.h"
 #include "tp_data/members/StringMember.h"
 #include "tp_data/members/StringIDVectorMember.h"
 #include "tp_data/members/NumberMember.h"
@@ -19,6 +20,7 @@ TP_DEFINE_ID(               stringIDVectorSID,                 "String id vector
 void createCollectionFactories(CollectionFactory& collectionFactory)
 {
   collectionFactory.addMemberFactory(new         StringMemberFactory());
+  collectionFactory.addMemberFactory(new       StringIDMemberFactory());
   collectionFactory.addMemberFactory(new StringIDVectorMemberFactory());
 
   collectionFactory.addMemberFactory(new    IntMemberFactory());

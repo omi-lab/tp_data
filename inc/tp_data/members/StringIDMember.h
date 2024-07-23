@@ -30,7 +30,7 @@ public:
 };
 
 //##################################################################################################
-using StringMemberFactory = tp_data::MultiDataMemberFactoryTemplate<StringIDMember, stringIDSID>;
+using StringIDMemberFactory = tp_data::MultiDataMemberFactoryTemplate<StringIDMember, stringIDSID>;
 
 }
 
