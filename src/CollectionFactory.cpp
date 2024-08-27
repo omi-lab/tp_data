@@ -414,7 +414,7 @@ void CollectionFactory::saveToPath(std::string& error,
                                    const std::string& path,
                                    bool append) const
 {
-#ifndef TP_FILESYSTEM
+#if 0
   tpWarning() << "CollectionFactory::saveToPath Not supported on this platform!";
   TP_UNUSED(error);
   TP_UNUSED(collection);
