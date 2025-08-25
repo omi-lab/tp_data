@@ -21,7 +21,7 @@ StringIDVectorMember* StringIDVectorMember::fromData(std::string& error, const s
 {
   TP_UNUSED(error);
   auto member = new StringIDVectorMember();
-  tp_utils::getJSONStringIDs(tp_utils::jsonFromString(data), member->data);
+  tp_utils::loadVectorOfStringIDsFromJSON(tp_utils::jsonFromString(data), member->data);
   return member;
 }
 

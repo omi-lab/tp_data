@@ -30,3 +30,5 @@ HEADERS += inc/tp_data/members/NumberMember.h
 
 SOURCES += src/members/StringIDVectorMember.cpp
 HEADERS += inc/tp_data/members/StringIDVectorMember.h
+
+HEADERS += inc/tp_data/members/MemberUtils.h
