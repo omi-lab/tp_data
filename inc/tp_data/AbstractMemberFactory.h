@@ -1,9 +1,8 @@
-#ifndef tp_data_AbstractMemberFactory_h
-#define tp_data_AbstractMemberFactory_h
+#pragma once
 
 #include "tp_data/AbstractMember.h"
 
-#include "json.hpp"
+#include "json.hpp" // IWYU pragma: keep
 
 namespace tp_data
 {
@@ -52,7 +51,7 @@ public:
   \param member The member to clone.
   \return A clone of the member of nullptr.
   */
-  virtual AbstractMember* clone(std::string& error, const AbstractMember& member) const=0;
+  virtual std::shared_ptr<AbstractMember> clone(std::string& error, const AbstractMember& member) const=0;
 
   //################################################################################################
   //! Save the member to data.
@@ -66,7 +65,7 @@ public:
   virtual void save(std::string& error, const AbstractMember& member, std::string& data) const=0;
 
   //################################################################################################
-  virtual AbstractMember* load(std::string& error, const std::string& data) const=0;
+  virtual std::shared_ptr<AbstractMember> load(std::string& error, const std::string& data) const=0;
 
 private:
   const tp_utils::StringID m_type;
@@ -86,13 +85,13 @@ public:
   }
 
   //################################################################################################
-  AbstractMember* clone(std::string& error, const AbstractMember& member) const override
+  std::shared_ptr<AbstractMember> clone(std::string& error, const AbstractMember& member) const override
   {
     auto m = dynamic_cast<const T*>(&member);
     if(!m)
     {
       error = "Failed to find member of type " + type().toString();
-      return nullptr;
+      return {};
     }
 
     return makeMember<T>("", m->data);
@@ -112,17 +111,17 @@ public:
   }
 
   //################################################################################################
-  AbstractMember* load(std::string& error, const std::string& data) const override
+  std::shared_ptr<AbstractMember> load(std::string& error, const std::string& data) const override
   {
     try
     {
       auto j = nlohmann::json::parse(data);
-      return T::fromJSON(j);
+      return std::shared_ptr<tp_data::AbstractMember>(T::fromJSON(j));
     }
     catch(...)
     {
       error = "Failed to parse JSON for " + type().toString();
-      return nullptr;
+      return {};
     }
   }
 };
@@ -140,7 +139,7 @@ public:
   }
 
   //################################################################################################
-  AbstractMember* clone(std::string& error, const AbstractMember& member) const override
+  std::shared_ptr<AbstractMember> clone(std::string& error, const AbstractMember& member) const override
   {
     auto m = dynamic_cast<const T*>(&member);
     if(!m)
@@ -151,7 +150,7 @@ public:
 
     auto newMember = new T();
     newMember->copyData(*m);
-    return newMember;
+    return std::shared_ptr<AbstractMember>(newMember);
   }
 
   //################################################################################################
@@ -168,12 +167,10 @@ public:
   }
 
   //################################################################################################
-  AbstractMember* load(std::string& error, const std::string& data) const override
+  std::shared_ptr<AbstractMember> load(std::string& error, const std::string& data) const override
   {
-    return T::fromData(error, data);
+    return std::shared_ptr<AbstractMember>(T::fromData(error, data));
   }
 };
 
 }
-
-#endif

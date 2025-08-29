@@ -1,7 +1,8 @@
-#ifndef tp_data_Collection_h
-#define tp_data_Collection_h
+#pragma once
 
 #include "tp_data/Globals.h"
+
+#include <memory>
 
 namespace tp_data
 {
@@ -9,7 +10,7 @@ class AbstractMember;
 
 //##################################################################################################
 //! This holds a collection of data objects.
-class Collection
+class TP_DATA_SHARED_EXPORT Collection
 {
   TP_NONCOPYABLE(Collection);
   TP_DQ;
@@ -47,10 +48,10 @@ public:
 
   //################################################################################################
   //! This takes ownership.
-  void addMember(AbstractMember* member);
+  void addMember(const std::shared_ptr<AbstractMember>& member);
 
   //################################################################################################
-  const std::vector<AbstractMember*>& members() const;
+  const std::vector<std::shared_ptr<AbstractMember>>& members() const;
 
   //################################################################################################
   //! Find an member.
@@ -59,21 +60,28 @@ public:
   \param name The unique name of the member to find.
   \returns A pointer to the member or nullptr.
   */
-  AbstractMember* member(const tp_utils::StringID& name) const;
+  const std::shared_ptr<AbstractMember>& member(const tp_utils::StringID& name) const;
 
   //################################################################################################
   template<typename T>
   void memberCast(const tp_utils::StringID& name, T*& member_) const
   {
-    member_ = dynamic_cast<T*>(member(name));
+    member_ = dynamic_cast<T*>(member(name).get());
+  }  
+
+  //################################################################################################
+  template<typename T>
+  T* memberCast(const tp_utils::StringID& name) const
+  {
+    return dynamic_cast<T*>(member(name).get());
   }
 
   //################################################################################################
   template<typename T>
   void memberCast(const std::function<void(const T&)> closure) const
   {
-    for(auto member : members())
-      if(auto m = dynamic_cast<T*>(member); m)
+    for(const auto& member : members())
+      if(auto m = dynamic_cast<T*>(member.get()); m)
         closure(*m);
   }
 
@@ -82,5 +90,3 @@ public:
 };
 
 }
-
-#endif

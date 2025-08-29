@@ -1,7 +1,12 @@
-#ifndef tp_data_Globals_h
-#define tp_data_Globals_h
+#pragma once
 
 #include "tp_utils/StringID.h"
+
+#if defined(TP_DATA_LIBRARY)
+#  define TP_DATA_SHARED_EXPORT TP_EXPORT
+#else
+#  define TP_DATA_SHARED_EXPORT TP_IMPORT
+#endif
 
 //##################################################################################################
 //! A pipeline for performing image processing
@@ -43,5 +48,3 @@ int createCollectionFactories_reg = [] \
 int staticInit();
 
 }
-
-#endif

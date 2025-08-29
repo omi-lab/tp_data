@@ -1,9 +1,6 @@
-#ifndef tp_data_NumberMember_h
-#define tp_data_NumberMember_h
+#pragma once
 
 #include "tp_data/AbstractMemberFactory.h"
-
-#include "json.hpp"
 
 #include <sstream>
 
@@ -64,5 +61,3 @@ using  FloatMemberFactory = tp_data::MultiDataMemberFactoryTemplate< FloatMember
 using DoubleMemberFactory = tp_data::MultiDataMemberFactoryTemplate<DoubleMember, doubleSID>;
 
 }
-
-#endif

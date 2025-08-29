@@ -1,7 +1,8 @@
-#ifndef tp_data_CollectionFactory_h
-#define tp_data_CollectionFactory_h
+#pragma once
 
 #include "tp_data/Globals.h"
+
+#include <memory>
 
 namespace tp_data
 {
@@ -124,7 +125,7 @@ public:
   \param member The member to clone.
   \return The clone or nullptr.
   */
-  AbstractMember* clone(std::string& error, const AbstractMember& member) const;
+  std::shared_ptr<AbstractMember> clone(std::string& error, const AbstractMember& member) const;
 
   //################################################################################################
   //! Serialize a member into a binary data string.
@@ -145,5 +146,3 @@ public:
 };
 
 }
-
-#endif

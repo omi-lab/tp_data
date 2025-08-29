@@ -1,9 +1,6 @@
-#ifndef tp_data_StringMember_h
-#define tp_data_StringMember_h
+#pragma once
 
 #include "tp_data/AbstractMemberFactory.h"
-
-#include "json.hpp"
 
 namespace tp_data
 {
@@ -35,5 +32,3 @@ public:
 using StringMemberFactory = tp_data::MultiDataMemberFactoryTemplate<StringMember, stringSID>;
 
 }
-
-#endif

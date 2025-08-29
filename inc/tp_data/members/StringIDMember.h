@@ -1,5 +1,4 @@
-#ifndef tp_data_StringIDMember_h
-#define tp_data_StringIDMember_h
+#pragma once
 
 #include "tp_data/AbstractMemberFactory.h"
 
@@ -33,5 +32,3 @@ public:
 using StringIDMemberFactory = tp_data::MultiDataMemberFactoryTemplate<StringIDMember, stringIDSID>;
 
 }
-
-#endif

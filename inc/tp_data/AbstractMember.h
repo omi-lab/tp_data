@@ -1,7 +1,8 @@
-#ifndef tp_data_AbstractMember_h
-#define tp_data_AbstractMember_h
+#pragma once
 
 #include "tp_data/Globals.h" // IWYU pragma: keep
+
+#include <memory>
 
 namespace tp_data
 {
@@ -66,13 +67,12 @@ private:
 
 //##################################################################################################
 template <typename M, typename T>
-M* makeMember(const tp_utils::StringID& name, const T& data)
+std::shared_ptr<tp_data::AbstractMember> makeMember(const tp_utils::StringID& name, const T& data)
 {
   auto member = new M(name);
   member->data = data;
-  return member;
+  return std::shared_ptr<tp_data::AbstractMember>(member);
 }
 
 }
 
-#endif

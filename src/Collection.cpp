@@ -13,25 +13,10 @@ struct Collection::Private
   std::string name;
   int64_t timestampMS{tp_utils::currentTimeMS()};
   std::vector<std::string> errors;
-  std::vector<AbstractMember*> members;
+  std::vector<std::shared_ptr<AbstractMember>> members;
 
   //################################################################################################
   Private()=default;
-
-  //################################################################################################
-  ~Private()
-  {
-    deleteAll();
-  }
-
-  //################################################################################################
-  void deleteAll()
-  {
-    errors.clear();
-
-    tpDeleteAll(members);
-    members.clear();
-  }
 };
 
 //##################################################################################################
@@ -84,31 +69,34 @@ const std::vector<std::string>& Collection::errors() const
 }
 
 //##################################################################################################
-void Collection::addMember(AbstractMember* member)
+void Collection::addMember(const std::shared_ptr<AbstractMember>& member)
 {
   d->members.push_back(member);
 }
 
 //##################################################################################################
-const std::vector<AbstractMember*>& Collection::members() const
+const std::vector<std::shared_ptr<AbstractMember>>& Collection::members() const
 {
   return d->members;
 }
 
 //##################################################################################################
-AbstractMember* Collection::member(const tp_utils::StringID& name) const
+const std::shared_ptr<AbstractMember>& Collection::member(const tp_utils::StringID& name) const
 {
-  for(auto member : d->members)
+  static thread_local std::shared_ptr<tp_data::AbstractMember> n;
+
+  for(const auto& member : d->members)
     if(member->name() == name)
       return member;
 
-  return nullptr;
+  return n;
 }
 
 //##################################################################################################
 void Collection::clear()
 {
-  d->deleteAll();
+  d->errors.clear();
+  d->members.clear();
 }
 
 }

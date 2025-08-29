@@ -163,7 +163,7 @@ void CollectionFactory::cloneAppend(std::string& error,
                                     Collection& output,
                                     const std::vector<std::string>& subset) const
 {
-  for(const auto member : collection.members())
+  for(const auto& member : collection.members())
   {
     if(!subset.empty() && !tpContains(subset, member->name()))
       continue;
@@ -379,7 +379,7 @@ void CollectionFactory::saveToData(std::string& error, const Collection& collect
   addPart(data, "name", collection.name());
   addPart(data, "timestamp", std::to_string(collection.timestampMS()));
 
-  for(const auto member : collection.members())
+  for(const auto& member : collection.members())
   {
     const tp_utils::StringID& type = member->type();
 
@@ -517,7 +517,7 @@ void CollectionFactory::saveToPath(std::string& error,
 }
 
 //##################################################################################################
-AbstractMember* CollectionFactory::clone(std::string& error, const AbstractMember& member) const
+std::shared_ptr<AbstractMember> CollectionFactory::clone(std::string& error, const AbstractMember& member) const
 {
   auto factory = memberFactory(member.type());
   if(!factory)
