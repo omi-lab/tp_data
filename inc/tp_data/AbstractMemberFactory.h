@@ -2,6 +2,8 @@
 
 #include "tp_data/AbstractMember.h"
 
+#include "tp_utils/TPPixel.h"
+
 #include "json.hpp" // IWYU pragma: keep
 
 namespace tp_data
@@ -21,7 +23,7 @@ public:
   \param type The type of member this factory works with.
   \param extension The file extension to save these members with.
   */
-  AbstractMemberFactory(tp_utils::StringID type, std::string extension);
+  AbstractMemberFactory(const tp_utils::StringID& type, const std::string& extension, TPPixel color);
 
   //################################################################################################
   virtual ~AbstractMemberFactory();
@@ -41,6 +43,10 @@ public:
   \return The file extension for this type of member.
   */
   const std::string& extension() const;
+
+  //################################################################################################
+  //! Color used for rendering node graphs.
+  TPPixel color() const;
 
   //################################################################################################
   //! Make a clone of the member.
@@ -70,6 +76,7 @@ public:
 private:
   const tp_utils::StringID m_type;
   std::string m_extension;
+  TPPixel m_color;
 };
 
 //##################################################################################################
@@ -78,8 +85,8 @@ class JSONMemberFactoryTemplate : public AbstractMemberFactory
 {
 public:
   //################################################################################################
-  JSONMemberFactoryTemplate():
-    AbstractMemberFactory(type_(), "json")
+  JSONMemberFactoryTemplate(TPPixel color):
+    AbstractMemberFactory(type_(), "json", color)
   {
 
   }
@@ -132,8 +139,8 @@ class MultiDataMemberFactoryTemplate : public AbstractMemberFactory
 {
 public:
   //################################################################################################
-  MultiDataMemberFactoryTemplate():
-    AbstractMemberFactory(type_(), T::extension)
+  MultiDataMemberFactoryTemplate(TPPixel color):
+    AbstractMemberFactory(type_(), T::extension, color)
   {
 
   }
@@ -149,7 +156,7 @@ public:
     }
 
     auto newMember = new T();
-    newMember->copyData(*m);
+    newMember->data = m->data;
     return std::shared_ptr<AbstractMember>(newMember);
   }
 

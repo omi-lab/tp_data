@@ -158,6 +158,12 @@ const AbstractMemberFactory* CollectionFactory::memberFactory(const tp_utils::St
 }
 
 //##################################################################################################
+const std::unordered_map<tp_utils::StringID, std::unique_ptr<AbstractMemberFactory>>& CollectionFactory::memberFactories() const
+{
+  return d->memberFactories;
+}
+
+//##################################################################################################
 void CollectionFactory::cloneAppend(std::string& error,
                                     const Collection& collection,
                                     Collection& output,
@@ -326,7 +332,7 @@ void CollectionFactory::loadFromPath(std::string& error,
       if(!subset.empty() && !tpContains(subset, name))
         continue;
 
-      auto fileName  = TPJSONString(jj, "fileName");
+      auto filename  = TPJSONString(jj, "filename");
       auto type      = TPJSONString(jj, "type");
       auto timestamp = TPJSONInt64T(jj, "timestamp");
 
@@ -348,7 +354,7 @@ void CollectionFactory::loadFromPath(std::string& error,
 
       std::string memberPath = path;
       memberPath += "/";
-      memberPath += fileName;
+      memberPath += filename;
       auto member = factory->load(error, tp_utils::readBinaryFile(memberPath));
 
 
@@ -477,13 +483,13 @@ void CollectionFactory::saveToPath(std::string& error,
       return;
     }
 
-    std::string fileName = name.toString();
-    fileName += ".";
-    fileName += factory->extension();
+    std::string filename = name.toString();
+    filename += ".";
+    filename += factory->extension();
 
     std::string filePath = path;
     filePath += "/";
-    filePath += fileName;
+    filePath += filename;
 
     tp_utils::writeBinaryFile(filePath, data);
 
@@ -491,7 +497,7 @@ void CollectionFactory::saveToPath(std::string& error,
       newMembers.push_back(name);
       nlohmann::json j;
       j["name"] = name.toString();
-      j["fileName"] = fileName;
+      j["filename"] = filename;
       j["type"] = type.toString();
       membersIndex.push_back(j);
     }

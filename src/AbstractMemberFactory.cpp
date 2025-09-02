@@ -4,9 +4,10 @@ namespace tp_data
 {
 
 //##################################################################################################
-AbstractMemberFactory::AbstractMemberFactory(tp_utils::StringID type, std::string extension):
-  m_type(std::move(type)),
-  m_extension(std::move(extension))
+AbstractMemberFactory::AbstractMemberFactory(const tp_utils::StringID& type, const std::string& extension, TPPixel color):
+  m_type(type),
+  m_extension(extension),
+  m_color(color)
 {
 
 }
@@ -26,5 +27,10 @@ const std::string& AbstractMemberFactory::extension() const
   return m_extension;
 }
 
+//##################################################################################################
+TPPixel AbstractMemberFactory::color() const
+{
+  return m_color;
+}
 
 }

@@ -19,14 +19,14 @@ TP_DEFINE_ID(               stringIDVectorSID,                 "String id vector
 //##################################################################################################
 void createCollectionFactories(CollectionFactory& collectionFactory)
 {
-  collectionFactory.addMemberFactory(new         StringMemberFactory());
-  collectionFactory.addMemberFactory(new       StringIDMemberFactory());
-  collectionFactory.addMemberFactory(new StringIDVectorMemberFactory());
+  collectionFactory.addMemberFactory(new         StringMemberFactory({52, 192, 235}));
+  collectionFactory.addMemberFactory(new       StringIDMemberFactory({25, 144, 181}));
+  collectionFactory.addMemberFactory(new StringIDVectorMemberFactory({8, 146, 189}));
 
-  collectionFactory.addMemberFactory(new    IntMemberFactory());
-  collectionFactory.addMemberFactory(new  SizeTMemberFactory());
-  collectionFactory.addMemberFactory(new  FloatMemberFactory());
-  collectionFactory.addMemberFactory(new DoubleMemberFactory());
+  collectionFactory.addMemberFactory(new    IntMemberFactory({212, 99, 193}));
+  collectionFactory.addMemberFactory(new  SizeTMemberFactory({166, 63, 148}));
+  collectionFactory.addMemberFactory(new  FloatMemberFactory({163, 31, 140}));
+  collectionFactory.addMemberFactory(new DoubleMemberFactory({212, 11, 177}));
 }
 
 //##################################################################################################

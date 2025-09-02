@@ -48,6 +48,9 @@ public:
   const AbstractMemberFactory* memberFactory(const tp_utils::StringID& type) const;
 
   //################################################################################################
+  const std::unordered_map<tp_utils::StringID, std::unique_ptr<AbstractMemberFactory>>& memberFactories() const;
+
+  //################################################################################################
   //! Clones a collection and adds it to the output.
   /*!
   This can be used to clone a collection or clone a collection and append its results to another
