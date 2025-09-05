@@ -71,6 +71,9 @@ const std::vector<std::string>& Collection::errors() const
 //##################################################################################################
 void Collection::addMember(const std::shared_ptr<AbstractMember>& member)
 {
+  if(!member)
+    return;
+
   d->members.push_back(member);
 }
 
